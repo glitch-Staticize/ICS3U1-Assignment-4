@@ -1,39 +1,32 @@
 <script setup>
 import { ref } from 'vue';
 
-const sideA = ref(0);
-const sideB = ref(0);
-const angleC = ref(0);
+const sideA = ref('');
+const sideB = ref('');
+const angleC = ref('');
+let result = ref('');
 
 // Cosine Law
 function cosineLaw() {
-  return sideC = Math.sqrt(sideA * sideA + sideB * sideB - 2 * sideA * sideB * Math.cos(angleC));
-}
-document.getElementById("calculateCosine").onclick = function (event) {
-    event.preventDefault();
-
-    var sideA = parseFloat(document.getElementById("sideA").value);
-    var sideB = parseFloat(document.getElementById("sideB").value);
-    var angleC = parseFloat(document.getElementById("angleC").value) * (Math.PI / 180);
-
-    var sideC = cosineLaw(sideA, sideB, angleC);
-    document.getElementById("cosineResult").innerText = sideC;
+  result = Math.sqrt(sideA.value * sideA.value + sideB.value * sideB.value - 2 * sideA.value * sideB.value * Math.cos(angleC.value));
 }
 </script>
 
 <template>
-  <form @submit.prevent="cosineLaw()">
-    <label for="sideA">Side a:</label>
-    <input type="number" id="sideA">
-    <label for="sideB">Side b:</label>
-    <input type="number" id="sideB">
-    <label for="angleC">Angle C:</label>
-    <input type="number" id="angleC">
-    <p>Side c: <span id="cosineResult"></span></p>
-    <button id="calculateCosine">Calculate</button>
-  </form>
+  <div class="box">
+    <form @submit.prevent="cosineLaw()">
+      <h1>Cosine Law Calculator</h1>
+      <label>Side A:</label>
+      <input type="number" v-model="sideA" />
+      <label>Side B:</label>
+      <input type="number" v-model="sideB" />
+      <label>Angle C:</label>
+      <input type="number" v-model="angleC" />
+      <button type="submit">Calculate</button>
+      <label>Side C (Result):</label>
+      <input v-model="result" type="number" readonly />
+    </form>
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
